@@ -1,0 +1,1 @@
+# celestial-objects-catalog
