@@ -1,4 +1,4 @@
-﻿using Nasa.Shared;
+﻿using Nasa.Shared.Domain;
 
 namespace Nasa.Domain.Entities;
 
@@ -8,9 +8,10 @@ public class CelestialObject : BaseEntity
     {
         // EF
     }
-    
+
     // TODO remove set and use another migration tool
-    public CelestialObject(string name, double mass, double equatorialDiameter, double surfaceTemperature, DateTime discoveryDate, Guid discoverySourceId)
+    public CelestialObject(string name, double mass, double equatorialDiameter, double surfaceTemperature,
+        DateTime discoveryDate, Guid discoverySourceId)
     {
         Name = name;
         Mass = mass;
@@ -20,7 +21,7 @@ public class CelestialObject : BaseEntity
         DiscoverySourceId = discoverySourceId;
         Type = GetObjectType();
     }
-    
+
     public string Name { get; set; }
 
     public double Mass { get; set; }
@@ -32,9 +33,9 @@ public class CelestialObject : BaseEntity
     public DateTime DiscoveryDate { get; set; }
 
     public DiscoverySource DiscoverySource { get; set; }
-    
+
     public Guid DiscoverySourceId { get; set; }
-    
+
     public CelestialObjectType Type { get; set; }
 
     private CelestialObjectType GetObjectType()
@@ -43,7 +44,7 @@ public class CelestialObject : BaseEntity
             .Where(celestialObjectType => celestialObjectType.Condition.Invoke(this))
             .OrderBy(c => c.RulePrecedence)
             .FirstOrDefault();
-        
+
         return celestialObjectType ?? CelestialObjectType.Unknown;
     }
 }

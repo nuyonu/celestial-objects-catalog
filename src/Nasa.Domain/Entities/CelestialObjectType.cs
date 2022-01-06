@@ -6,8 +6,8 @@ namespace Nasa.Domain.Entities;
 public class CelestialObjectType : SmartEnum<CelestialObjectType>
 {
     public static readonly CelestialObjectType Unknown =
-        new("Unknown", 0, (_) => false, default);
-    
+        new("Unknown", 0, _ => false, default);
+
     public static readonly CelestialObjectType Planet =
         new("Planet", 1, celestialObject => celestialObject.Mass < Constants.JupiterMass, 1);
 

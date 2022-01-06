@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Nasa.Application.Common.Interfaces;
 using Nasa.Domain.Entities;
-using Nasa.Shared;
+using Nasa.Shared.Application;
 
 namespace Nasa.Application.DiscoverySources.Commands.CreateDiscoverySource;
 
@@ -25,14 +25,16 @@ public class CreateDiscoverySourceCommandHandler : IRequestHandler<CreateDiscove
     {
         this.repository = repository;
     }
-    
-    public async Task<CommandResponse<Guid>> Handle(CreateDiscoverySourceCommand request, CancellationToken cancellationToken)
+
+    public async Task<CommandResponse<Guid>> Handle(CreateDiscoverySourceCommand request,
+        CancellationToken cancellationToken)
     {
         var discoverySource =
-            new DiscoverySource(request.Name, request.EstablishmentDate, DiscoverySourceType.FromValue(request.Type), request.StateOwner);
+            new DiscoverySource(request.Name, request.EstablishmentDate, DiscoverySourceType.FromValue(request.Type),
+                request.StateOwner);
 
-        await this.repository.CreateAsync(discoverySource);
-        
+        await repository.CreateAsync(discoverySource);
+
         return CommandResponse<Guid>.Success(discoverySource.Id);
     }
 }

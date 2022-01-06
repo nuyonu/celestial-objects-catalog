@@ -1,14 +1,15 @@
 ﻿using MediatR;
 using Nasa.Application.Common.Interfaces;
 using Nasa.Domain.Entities;
-using Nasa.Shared;
+using Nasa.Shared.Application;
 
 namespace Nasa.Application.CelestialObjects.Queries.GetCelestialObjects;
 
-public class GetCelestialObjectsCommand : Command<GetCelestialObjectsResponse>
-{ }
+public class GetCelestialObjectsCommand : Command<GetCelestialObjectsResponse> { }
 
-public class GetCelestialObjectsCommandHandler : IRequestHandler<GetCelestialObjectsCommand, CommandResponse<GetCelestialObjectsResponse>>
+public class
+    GetCelestialObjectsCommandHandler : IRequestHandler<GetCelestialObjectsCommand,
+        CommandResponse<GetCelestialObjectsResponse>>
 {
     private readonly IReadRepository<CelestialObject> readRepository;
 
@@ -16,10 +17,11 @@ public class GetCelestialObjectsCommandHandler : IRequestHandler<GetCelestialObj
     {
         this.readRepository = readRepository;
     }
-    
-    public async Task<CommandResponse<GetCelestialObjectsResponse>> Handle(GetCelestialObjectsCommand request, CancellationToken cancellationToken)
+
+    public async Task<CommandResponse<GetCelestialObjectsResponse>> Handle(GetCelestialObjectsCommand request,
+        CancellationToken cancellationToken)
     {
-        var celestialObjects = await this.readRepository.ListAsync(cancellationToken);
+        var celestialObjects = await readRepository.ListAsync(cancellationToken);
 
         var response = new GetCelestialObjectsResponse
         {

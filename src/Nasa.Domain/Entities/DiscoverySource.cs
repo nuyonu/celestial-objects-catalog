@@ -1,4 +1,4 @@
-﻿using Nasa.Shared;
+﻿using Nasa.Shared.Domain;
 
 namespace Nasa.Domain.Entities;
 
@@ -8,7 +8,7 @@ public class DiscoverySource : BaseEntity
     {
         // EF
     }
-    
+
     public DiscoverySource(string name, DateTime establishmentDate, DiscoverySourceType type, string stateOwner)
     {
         Name = name;
@@ -24,6 +24,6 @@ public class DiscoverySource : BaseEntity
     public DiscoverySourceType Type { get; set; }
 
     public string StateOwner { get; set; }
-    
+
     public List<CelestialObject> CelestialObjects { get; set; }
 }

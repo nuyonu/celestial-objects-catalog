@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Nasa.Shared\Nasa.Shared.csproj" />
+        <ProjectReference Include="..\Nasa.Shared\Nasa.Shared.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Ardalis.SmartEnum" Version="2.0.1" />
+        <PackageReference Include="Ardalis.SmartEnum" Version="2.0.1"/>
     </ItemGroup>
 
 </Project>

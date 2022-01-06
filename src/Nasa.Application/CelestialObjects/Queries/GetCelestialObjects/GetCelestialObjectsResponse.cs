@@ -18,6 +18,6 @@ public class CelestialObjectResponse
     public DateTime DiscoveryDate { get; set; }
 
     public Guid DiscoverySourceId { get; set; }
-    
+
     public string Type { get; set; }
 }

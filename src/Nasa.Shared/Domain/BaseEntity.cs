@@ -1,4 +1,4 @@
-﻿namespace Nasa.Shared;
+﻿namespace Nasa.Shared.Domain;
 
 public class BaseEntity
 {

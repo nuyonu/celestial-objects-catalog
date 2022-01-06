@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Nasa.Application.Common.Interfaces;
 using Nasa.Domain.Entities;
-using Nasa.Shared;
+using Nasa.Shared.Application;
 
 namespace Nasa.Application.CelestialObjects.Commands.CreateCelestialObject;
 
@@ -28,14 +28,15 @@ public class CreateCelestialObjectCommandHandler : IRequestHandler<CreateCelesti
     {
         this.repository = repository;
     }
-    
-    public async Task<CommandResponse<Guid>> Handle(CreateCelestialObjectCommand request, CancellationToken cancellationToken)
+
+    public async Task<CommandResponse<Guid>> Handle(CreateCelestialObjectCommand request,
+        CancellationToken cancellationToken)
     {
         var celestialObject = new CelestialObject(request.Name, request.Mass, request.EquatorialDiameter,
             request.SurfaceTemperature, request.DiscoveryDate, request.DiscoverySourceId);
 
-        await this.repository.CreateAsync(celestialObject);
-        
+        await repository.CreateAsync(celestialObject);
+
         return CommandResponse<Guid>.Success(celestialObject.Id);
     }
 }

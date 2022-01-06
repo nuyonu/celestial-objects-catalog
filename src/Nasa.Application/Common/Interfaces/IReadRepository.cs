@@ -1,5 +1,5 @@
 ﻿using Ardalis.Specification;
-using Nasa.Shared;
+using Nasa.Shared.Domain;
 
 namespace Nasa.Application.Common.Interfaces;
 
