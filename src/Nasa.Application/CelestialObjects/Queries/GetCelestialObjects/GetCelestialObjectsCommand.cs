@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Nasa.Application.CelestialObjects.Queries.Common;
 using Nasa.Application.Common.Interfaces;
 using Nasa.Domain.Entities;
 using Nasa.Shared.Application;

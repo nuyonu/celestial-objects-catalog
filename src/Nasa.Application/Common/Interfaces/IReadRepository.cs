@@ -10,4 +10,6 @@ public interface IReadRepository<TEntity> where TEntity : BaseEntity
     Task<List<TEntity>> ListAsync(CancellationToken cancellationToken = default);
 
     Task<TEntity?> GetById(Guid id, CancellationToken cancellationToken = default);
+    
+    // TODO method with multiple specifications???
 }
