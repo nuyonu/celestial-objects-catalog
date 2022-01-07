@@ -3,16 +3,16 @@ using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Nasa.Application.Common.Interfaces;
 using Nasa.Infrastructure.Persistence;
-using Nasa.Shared;
+using Nasa.Shared.Domain;
 
 namespace Nasa.Infrastructure.Repositories;
 
 public class ReadRepository<TEntity> : BaseRepository<TEntity>, IReadRepository<TEntity> where TEntity : BaseEntity
 {
-    public ReadRepository(DatabaseContext context) : base(context)
-    { }
+    public ReadRepository(DatabaseContext context) : base(context) { }
 
-    public async Task<List<TEntity>> ListAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    public async Task<List<TEntity>> ListAsync(ISpecification<TEntity> specification,
+        CancellationToken cancellationToken = default)
     {
         return await ApplySpecification(specification).ToListAsync(cancellationToken);
     }

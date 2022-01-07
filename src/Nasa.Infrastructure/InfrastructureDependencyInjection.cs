@@ -11,19 +11,20 @@ public static class InfrastructureDependencyInjection
     public static IServiceCollection RegisterInfrastructure(this IServiceCollection services)
     {
         services.RegisterDatabase();
-        
+
         services.RegisterRepositories();
-        
+
         return services;
     }
 
     private static void RegisterDatabase(this IServiceCollection services)
     {
         services.AddDbContext<DatabaseContext>(options =>
-            options.UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=NasaCatalog;Integrated Security=True",
+            options.UseSqlServer(
+                "Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=NasaCatalog;Integrated Security=True",
                 opt => opt.MigrationsAssembly(typeof(DatabaseContext).Assembly.FullName)));
     }
-    
+
     private static void RegisterRepositories(this IServiceCollection services)
     {
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

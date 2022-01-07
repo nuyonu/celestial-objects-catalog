@@ -1,7 +1,7 @@
 ﻿using System.Net.Mime;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
-using Nasa.Shared;
+using Nasa.Shared.Application;
 using Newtonsoft.Json;
 
 namespace Nasa.API;
@@ -20,7 +20,7 @@ public static class WebApplicationExtensions
                 var exception = exceptionHandlerPathFeature?.Error;
 
                 int code;
-                IEnumerable<string> errors; 
+                IEnumerable<string> errors;
 
                 switch (exception)
                 {
@@ -28,14 +28,14 @@ public static class WebApplicationExtensions
                     {
                         code = StatusCodes.Status400BadRequest;
                         errors = validationException.Errors.Select(c => c.ErrorMessage);
-                        
+
                         break;
                     }
                     default:
                     {
                         code = StatusCodes.Status500InternalServerError;
                         errors = new List<string> { "Something went wrong" };
-                        
+
                         break;
                     }
                 }

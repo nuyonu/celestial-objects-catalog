@@ -1,15 +1,15 @@
 ﻿using MediatR;
-using Nasa.Application.CelestialObjects.Queries.GetCelestialObjects;
 using Nasa.Application.Common.Interfaces;
 using Nasa.Domain.Entities;
-using Nasa.Shared;
+using Nasa.Shared.Application;
 
 namespace Nasa.Application.DiscoverySources.Queries.GetDiscoverySources;
 
-public class GetDiscoverySourcesCommand : Command<GetDiscoverySourcesResponse>
-{ }
+public class GetDiscoverySourcesCommand : Command<GetDiscoverySourcesResponse> { }
 
-public class GetDiscoverySourcesCommandHandler : IRequestHandler<GetDiscoverySourcesCommand, CommandResponse<GetDiscoverySourcesResponse>>
+public class
+    GetDiscoverySourcesCommandHandler : IRequestHandler<GetDiscoverySourcesCommand,
+        CommandResponse<GetDiscoverySourcesResponse>>
 {
     private readonly IReadRepository<DiscoverySource> readRepository;
 
@@ -17,10 +17,11 @@ public class GetDiscoverySourcesCommandHandler : IRequestHandler<GetDiscoverySou
     {
         this.readRepository = readRepository;
     }
-    
-    public async Task<CommandResponse<GetDiscoverySourcesResponse>> Handle(GetDiscoverySourcesCommand request, CancellationToken cancellationToken)
+
+    public async Task<CommandResponse<GetDiscoverySourcesResponse>> Handle(GetDiscoverySourcesCommand request,
+        CancellationToken cancellationToken)
     {
-        var discoverySources = await this.readRepository.ListAsync(cancellationToken);
+        var discoverySources = await readRepository.ListAsync(cancellationToken);
 
         var response = new GetDiscoverySourcesResponse
         {
@@ -32,7 +33,7 @@ public class GetDiscoverySourcesCommandHandler : IRequestHandler<GetDiscoverySou
                 StateOwner = c.StateOwner
             })
         };
-        
+
         return CommandResponse<GetDiscoverySourcesResponse>.Success(response);
     }
 }
