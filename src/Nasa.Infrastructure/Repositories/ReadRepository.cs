@@ -21,6 +21,17 @@ public class ReadRepository<TEntity> : BaseRepository<TEntity>, IReadRepository<
     {
         return await DbSet.ToListAsync(cancellationToken);
     }
+    
+    public async Task<List<TEntity>> ListAsync(IEnumerable<ISpecification<TEntity>> specifications,
+        CancellationToken cancellationToken = default)
+    {
+        var resultAfterSpecifications = DbSet.AsQueryable();
+
+        resultAfterSpecifications = specifications.Aggregate(resultAfterSpecifications,
+            (current, specification) => ApplySpecification(specification, current));
+
+        return await resultAfterSpecifications.ToListAsync(cancellationToken);
+    }
 
     public async Task<TEntity?> GetById(Guid id, CancellationToken cancellationToken = default)
     {
@@ -30,5 +41,10 @@ public class ReadRepository<TEntity> : BaseRepository<TEntity>, IReadRepository<
     private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
     {
         return SpecificationEvaluator.Default.GetQuery(DbSet.AsQueryable(), specification);
+    }
+
+    private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification, IQueryable<TEntity> source)
+    {
+        return SpecificationEvaluator.Default.GetQuery(source, specification);
     }
 }

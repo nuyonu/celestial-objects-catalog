@@ -5,8 +5,8 @@ namespace Nasa.Application.CelestialObjects.Specifications;
 
 public sealed class CelestialObjectsByContainingNameSpec : Specification<CelestialObject>
 {
-    public CelestialObjectsByContainingNameSpec(string name)
+    public CelestialObjectsByContainingNameSpec(string? name)
     {
-        Query.Where(c => c.Name.Contains(name));
+        Query.Where(c => c.Name.Contains(name ?? string.Empty));
     }
 }
