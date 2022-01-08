@@ -4,12 +4,13 @@ namespace Nasa.Domain.Entities;
 
 public class CelestialObject : BaseEntity
 {
+    #pragma warning disable CS8618
+    // TODO remove set and use another migration tool
     private CelestialObject()
     {
         // EF
     }
 
-    // TODO remove set and use another migration tool
     public CelestialObject(string name, double mass, double equatorialDiameter, double surfaceTemperature,
         DateTime discoveryDate, Guid discoverySourceId)
     {

@@ -3,8 +3,4 @@ using Nasa.Domain.Entities;
 
 namespace Nasa.Application.CelestialObjects.Specifications;
 
-public class CelestialObjectsAllSpec : Specification<CelestialObject>
-{
-    public CelestialObjectsAllSpec()
-    { }
-}
+public class CelestialObjectsAllSpec : Specification<CelestialObject> { }

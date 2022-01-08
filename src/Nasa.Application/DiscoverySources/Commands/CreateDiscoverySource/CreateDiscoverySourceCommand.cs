@@ -11,7 +11,6 @@ public class CreateDiscoverySourceCommand : Command<Guid>
 
     public DateTime EstablishmentDate { get; set; }
 
-    // TODO fix SmartEnum request response
     public int Type { get; set; }
 
     public string StateOwner { get; set; }

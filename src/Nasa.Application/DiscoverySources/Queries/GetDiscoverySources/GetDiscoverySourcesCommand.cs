@@ -25,13 +25,7 @@ public class
 
         var response = new GetDiscoverySourcesResponse
         {
-            DiscoverySources = discoverySources.Select(c => new DiscoverySourceResponse
-            {
-                Name = c.Name,
-                Type = c.Type.Name,
-                EstablishmentDate = c.EstablishmentDate,
-                StateOwner = c.StateOwner
-            })
+            DiscoverySources = discoverySources.Select(c => new DiscoverySourceResponse(c.Name, c.EstablishmentDate, c.Type.Name, c.StateOwner))
         };
 
         return CommandResponse<GetDiscoverySourcesResponse>.Success(response);

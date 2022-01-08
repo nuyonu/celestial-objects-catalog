@@ -4,9 +4,12 @@ namespace Nasa.Domain.Entities;
 
 public class DiscoverySource : BaseEntity
 {
+    #pragma warning disable CS8618
+    // TODO remove set and use another migration tool
     private DiscoverySource()
     {
         // EF
+        CelestialObjects = new List<CelestialObject>();
     }
 
     public DiscoverySource(string name, DateTime establishmentDate, DiscoverySourceType type, string stateOwner)
@@ -15,6 +18,7 @@ public class DiscoverySource : BaseEntity
         EstablishmentDate = establishmentDate;
         Type = type;
         StateOwner = stateOwner;
+        CelestialObjects = new List<CelestialObject>();
     }
 
     public string Name { get; set; }
