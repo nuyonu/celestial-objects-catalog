@@ -14,6 +14,7 @@ public class DiscoverySource : BaseEntity
 
     public DiscoverySource(string name, DateTime establishmentDate, DiscoverySourceType type, string stateOwner)
     {
+        Id = Guid.NewGuid();
         Name = name;
         EstablishmentDate = establishmentDate;
         Type = type;

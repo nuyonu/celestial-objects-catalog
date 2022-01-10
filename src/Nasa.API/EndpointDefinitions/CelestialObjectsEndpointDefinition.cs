@@ -38,7 +38,7 @@ public class CelestialObjectsEndpointDefinition : IEndpointDefinition
     private static async Task<IResult> GetCelestialObjectsAsync(string? type, string? name, string? stateOwner,
         IMediator mediator)
     {
-        return Results.Ok(await mediator.Send(GetCelestialObjectsCommand.Create(type, name, stateOwner)));
+        return Results.Ok(await mediator.Send(new GetCelestialObjectsCommand(type, name, stateOwner)));
     }
     
     private static async Task<IResult> GetCelestialObjectByIdAsync(Guid id, IMediator mediator)

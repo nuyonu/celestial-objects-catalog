@@ -14,6 +14,7 @@ public class CelestialObject : BaseEntity
     public CelestialObject(string name, double mass, double equatorialDiameter, double surfaceTemperature,
         DateTime discoveryDate, Guid discoverySourceId)
     {
+        Id = Guid.NewGuid();
         Name = name;
         Mass = mass;
         EquatorialDiameter = equatorialDiameter;

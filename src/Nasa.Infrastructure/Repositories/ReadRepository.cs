@@ -33,7 +33,7 @@ public class ReadRepository<TEntity> : BaseRepository<TEntity>, IReadRepository<
         return await resultAfterSpecifications.ToListAsync(cancellationToken);
     }
 
-    public async Task<TEntity> GetById(Guid id, CancellationToken cancellationToken = default)
+    public async Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var entity = await DbSet.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 

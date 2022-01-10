@@ -13,16 +13,21 @@ public class GetCelestialObjectsCommand : Command<GetCelestialObjectsResponse>
     private string? name;
     private string? stateOwner;
     private string? type;
-
-    private GetCelestialObjectsCommand()
+    
+    public GetCelestialObjectsCommand(string? type, string? name, string? stateOwner)
     {
         Specifications = new List<Specification<CelestialObject>>();
+        Type = type;
+        Name = name;
+        StateOwner = stateOwner;
+        
+        if (!this.Specifications.Any()) this.Specifications.Add(new CelestialObjectsAllSpec());
     }
 
     public string? Type
     {
         get => type;
-        private set
+        private init
         {
             type = value;
 
@@ -33,7 +38,7 @@ public class GetCelestialObjectsCommand : Command<GetCelestialObjectsResponse>
     public string? Name
     {
         get => name;
-        private set
+        private init
         {
             name = value;
 
@@ -44,7 +49,7 @@ public class GetCelestialObjectsCommand : Command<GetCelestialObjectsResponse>
     public string? StateOwner
     {
         get => stateOwner;
-        private set
+        private init
         {
             stateOwner = value;
 
@@ -53,20 +58,6 @@ public class GetCelestialObjectsCommand : Command<GetCelestialObjectsResponse>
     }
 
     public List<Specification<CelestialObject>> Specifications { get; }
-
-    public static GetCelestialObjectsCommand Create(string? type, string? name, string? stateOwner)
-    {
-        var command = new GetCelestialObjectsCommand
-        {
-            Type = type,
-            Name = name,
-            StateOwner = stateOwner
-        };
-
-        if (!command.Specifications.Any()) command.Specifications.Add(new CelestialObjectsAllSpec());
-
-        return command;
-    }
 }
 
 public class GetCelestialObjectsCommandHandler : IRequestHandler<GetCelestialObjectsCommand,
