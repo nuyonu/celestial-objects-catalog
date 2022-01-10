@@ -33,9 +33,16 @@ public class ReadRepository<TEntity> : BaseRepository<TEntity>, IReadRepository<
         return await resultAfterSpecifications.ToListAsync(cancellationToken);
     }
 
-    public async Task<TEntity?> GetById(Guid id, CancellationToken cancellationToken = default)
+    public async Task<TEntity> GetById(Guid id, CancellationToken cancellationToken = default)
     {
-        return await DbSet.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+        var entity = await DbSet.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
+
+        if (entity == null)
+        {
+            throw new EntityNotFoundException(id);
+        }
+
+        return entity;
     }
 
     private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)

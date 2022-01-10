@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Nasa.API.EndpointDefinitions.Common;
 using Nasa.Application.CelestialObjects.Commands.CreateCelestialObject;
+using Nasa.Application.CelestialObjects.Queries.Common;
+using Nasa.Application.CelestialObjects.Queries.GetCelestialObjectById;
 using Nasa.Application.CelestialObjects.Queries.GetCelestialObjects;
 using Nasa.Shared.Application;
 
@@ -8,7 +10,7 @@ namespace Nasa.API.EndpointDefinitions;
 
 public class CelestialObjectsEndpointDefinition : IEndpointDefinition
 {
-    private const string Name = "celestialObjects";
+    private const string Name = "api/celestialObjects";
 
     public void DefineEndpoints(WebApplication app)
     {
@@ -17,6 +19,9 @@ public class CelestialObjectsEndpointDefinition : IEndpointDefinition
 
         app.MapGet(Name, GetCelestialObjectsAsync)
             .Produces<CommandResponse<GetCelestialObjectsResponse>>();
+
+        app.MapGet($"{Name}/{{id}}", GetCelestialObjectByIdAsync)
+            .Produces<CommandResponse<CelestialObjectResponse>>();
     }
 
     public void DefineServices(IServiceCollection services)
@@ -27,12 +32,17 @@ public class CelestialObjectsEndpointDefinition : IEndpointDefinition
     private static async Task<IResult> CreateCelestialObjectAsync(
         CreateCelestialObjectCommand command, IMediator mediator)
     {
-        return Results.Ok(await mediator.Send(command));
+        return Results.Created($"{Name}/id", await mediator.Send(command));
     }
 
     private static async Task<IResult> GetCelestialObjectsAsync(string? type, string? name, string? stateOwner,
         IMediator mediator)
     {
         return Results.Ok(await mediator.Send(GetCelestialObjectsCommand.Create(type, name, stateOwner)));
+    }
+    
+    private static async Task<IResult> GetCelestialObjectByIdAsync(Guid id, IMediator mediator)
+    {
+        return Results.Ok(await mediator.Send(new GetCelestialObjectByIdCommand(id)));
     }
 }

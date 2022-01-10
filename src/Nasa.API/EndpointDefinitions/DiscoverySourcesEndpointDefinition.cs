@@ -8,7 +8,7 @@ namespace Nasa.API.EndpointDefinitions;
 
 public class DiscoverySourcesEndpointDefinition : IEndpointDefinition
 {
-    private const string Name = "discoverySources";
+    private const string Name = "api/discoverySources";
 
     public void DefineEndpoints(WebApplication app)
     {
@@ -32,6 +32,6 @@ public class DiscoverySourcesEndpointDefinition : IEndpointDefinition
     private static async Task<IResult> CreateDiscoverySource(CreateDiscoverySourceCommand createDiscoverySourceCommand,
         IMediator mediator)
     {
-        return Results.Ok(await mediator.Send(createDiscoverySourceCommand));
+        return Results.Created($"{Name}/id", await mediator.Send(createDiscoverySourceCommand));
     }
 }
