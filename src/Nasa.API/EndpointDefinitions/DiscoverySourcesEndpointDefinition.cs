@@ -8,14 +8,14 @@ namespace Nasa.API.EndpointDefinitions;
 
 public class DiscoverySourcesEndpointDefinition : IEndpointDefinition
 {
-    private const string Name = "discoverySources";
+    private const string Name = "api/discoverySources";
 
     public void DefineEndpoints(WebApplication app)
     {
-        app.MapPost(Name, CreateDiscoverySource)
+        app.MapPost(Name, CreateDiscoverySourceAsync)
             .Produces<Guid>();
 
-        app.MapGet(Name, GetDiscoverySources)
+        app.MapGet(Name, GetDiscoverySourcesAsync)
             .Produces<CommandResponse<GetDiscoverySourcesResponse>>();
     }
 
@@ -24,14 +24,14 @@ public class DiscoverySourcesEndpointDefinition : IEndpointDefinition
         // Register services related to current endpoints
     }
 
-    private static async Task<IResult> GetDiscoverySources(IMediator mediator)
+    private static async Task<IResult> GetDiscoverySourcesAsync(IMediator mediator)
     {
         return Results.Ok(await mediator.Send(new GetDiscoverySourcesCommand()));
     }
 
-    private static async Task<IResult> CreateDiscoverySource(CreateDiscoverySourceCommand createDiscoverySourceCommand,
+    private static async Task<IResult> CreateDiscoverySourceAsync(CreateDiscoverySourceCommand createDiscoverySourceCommand,
         IMediator mediator)
     {
-        return Results.Ok(await mediator.Send(createDiscoverySourceCommand));
+        return Results.Created($"{Name}/id", await mediator.Send(createDiscoverySourceCommand));
     }
 }

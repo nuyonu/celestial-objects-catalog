@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Nasa.Shared.Application;
+using Nasa.Shared.Domain;
 using Newtonsoft.Json;
 
 namespace Nasa.API;
@@ -31,10 +32,17 @@ public static class WebApplicationExtensions
 
                         break;
                     }
+                    case EntityNotFoundException entityNotFoundException:
+                    {
+                        code = StatusCodes.Status400BadRequest;
+                        errors = new []{ entityNotFoundException.Message };
+
+                        break;
+                    }
                     default:
                     {
                         code = StatusCodes.Status500InternalServerError;
-                        errors = new List<string> { "Something went wrong" };
+                        errors = new List<string> { "Something went wrong." };
 
                         break;
                     }

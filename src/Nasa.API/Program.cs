@@ -15,9 +15,8 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-builder.Services.RegisterApplication();
-
-builder.Services.RegisterInfrastructure();
+builder.Services.RegisterApplication()
+    .RegisterInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
@@ -28,3 +27,8 @@ app.UseEndpointDefinitions();
 app.ConfigureExceptionHandler();
 
 app.Run();
+
+#pragma warning disable CA1050
+public partial class Program
+{ }
+#pragma warning restore CA1050
