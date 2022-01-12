@@ -18,6 +18,8 @@ builder.Services.Configure<JsonOptions>(options =>
 builder.Services.RegisterApplication()
     .RegisterInfrastructure(builder.Configuration);
 
+await AutoMigration.MigrateAsync(builder.Services.BuildServiceProvider());
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
@@ -26,9 +28,12 @@ app.UseEndpointDefinitions();
 
 app.ConfigureExceptionHandler();
 
-app.Run();
+await app.RunAsync();
 
 #pragma warning disable CA1050
-public partial class Program
-{ }
+namespace Nasa.API
+{
+    public partial class Program // For testing purpose
+    { }
+}
 #pragma warning restore CA1050

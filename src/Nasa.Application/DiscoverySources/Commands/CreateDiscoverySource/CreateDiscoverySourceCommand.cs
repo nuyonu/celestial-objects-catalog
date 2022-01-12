@@ -11,7 +11,7 @@ public class CreateDiscoverySourceCommand : Command<Guid>
 
     public DateTime EstablishmentDate { get; set; }
 
-    public int Type { get; set; }
+    public string Type { get; set; }
 
     public string StateOwner { get; set; }
 }
@@ -29,7 +29,7 @@ public class CreateDiscoverySourceCommandHandler : IRequestHandler<CreateDiscove
         CancellationToken cancellationToken)
     {
         var discoverySource =
-            new DiscoverySource(request.Name, request.EstablishmentDate, DiscoverySourceType.FromValue(request.Type),
+            new DiscoverySource(request.Name, request.EstablishmentDate, DiscoverySourceType.FromName(request.Type),
                 request.StateOwner);
 
         await repository.CreateAsync(discoverySource);

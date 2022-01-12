@@ -38,7 +38,7 @@ public class DiscoverySourceIntegrationTests : IClassFixture<NasaAppFixture>
         var newDiscoverySource = new CreateDiscoverySourceCommand
         {
             Name = "Hubble Space Telescope",
-            Type = 1,
+            Type = DiscoverySourceType.GroundTelescope.Name,
             EstablishmentDate = DateTime.Now,
             StateOwner = "USA"
         };
@@ -63,7 +63,7 @@ public class DiscoverySourceIntegrationTests : IClassFixture<NasaAppFixture>
         responseAfterAddingDiscoverySource?.Errors.Should().HaveCount(0);
         responseAfterAddingDiscoverySource?.Result.DiscoverySources.Should().Contain(x =>
             x.Name == newDiscoverySource.Name &&
-            x.Type == DiscoverySourceType.FromValue(newDiscoverySource.Type).Name &&
+            x.Type == DiscoverySourceType.FromName(newDiscoverySource.Type, false).Name &&
             x.EstablishmentDate == newDiscoverySource.EstablishmentDate &&
             x.StateOwner == newDiscoverySource.StateOwner);
     }
