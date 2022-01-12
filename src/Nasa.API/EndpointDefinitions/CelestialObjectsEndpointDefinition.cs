@@ -19,7 +19,7 @@ public class CelestialObjectsEndpointDefinition : IEndpointDefinition
 
         app.MapGet(Name, GetCelestialObjectsAsync)
             .Produces<CommandResponse<GetCelestialObjectsResponse>>();
-
+        
         app.MapGet($"{Name}/{{id}}", GetCelestialObjectByIdAsync)
             .Produces<CommandResponse<CelestialObjectResponse>>();
     }
@@ -29,14 +29,12 @@ public class CelestialObjectsEndpointDefinition : IEndpointDefinition
         // Register services related to current endpoints
     }
 
-    private static async Task<IResult> CreateCelestialObjectAsync(
-        CreateCelestialObjectCommand command, IMediator mediator)
+    private static async Task<IResult> CreateCelestialObjectAsync(CreateCelestialObjectCommand command, IMediator mediator)
     {
         return Results.Created($"{Name}/id", await mediator.Send(command));
     }
 
-    private static async Task<IResult> GetCelestialObjectsAsync(string? type, string? name, string? stateOwner,
-        IMediator mediator)
+    private static async Task<IResult> GetCelestialObjectsAsync(string? type, string? name, string? stateOwner, IMediator mediator)
     {
         return Results.Ok(await mediator.Send(new GetCelestialObjectsCommand(type, name, stateOwner)));
     }
