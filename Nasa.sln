@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.API.IntegrationTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.Application.UnitTests", "tests\Nasa.Application.UnitTests\Nasa.Application.UnitTests.csproj", "{D6AAD70E-BBDB-4651-A90B-63EA15724813}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.Domain.UnitTests", "tests\Nasa.Domain.UnitTests\Nasa.Domain.UnitTests.csproj", "{EBB960ED-445D-4D8B-A5AB-9AF510039E46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{D6AAD70E-BBDB-4651-A90B-63EA15724813}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6AAD70E-BBDB-4651-A90B-63EA15724813}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6AAD70E-BBDB-4651-A90B-63EA15724813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBB960ED-445D-4D8B-A5AB-9AF510039E46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBB960ED-445D-4D8B-A5AB-9AF510039E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBB960ED-445D-4D8B-A5AB-9AF510039E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBB960ED-445D-4D8B-A5AB-9AF510039E46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +76,6 @@ Global
 		{03699CAC-C1F9-429F-8CB9-9EFBD3323F1A} = {5D9F89F7-3C03-4EAA-945F-56556CBDC215}
 		{4F19A52E-76F2-45EC-A7E3-3318605E2C12} = {5E43FBBA-A539-419C-821F-48E11953FD28}
 		{D6AAD70E-BBDB-4651-A90B-63EA15724813} = {5E43FBBA-A539-419C-821F-48E11953FD28}
+		{EBB960ED-445D-4D8B-A5AB-9AF510039E46} = {5E43FBBA-A539-419C-821F-48E11953FD28}
 	EndGlobalSection
 EndGlobal
