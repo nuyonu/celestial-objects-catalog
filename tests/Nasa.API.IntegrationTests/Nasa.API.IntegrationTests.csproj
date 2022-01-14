@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Alba" Version="6.0.0" />
         <PackageReference Include="FluentAssertions" Version="6.3.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
@@ -24,6 +25,12 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\Nasa.API\Nasa.API.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Samples\CelestialObjectsSample.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

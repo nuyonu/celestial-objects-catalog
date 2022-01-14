@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Nasa.API.Common;
 using Nasa.API.EndpointDefinitions.Common;
 using Nasa.Application.CelestialObjects.Commands.CreateCelestialObject;
 using Nasa.Application.CelestialObjects.Queries.Common;
@@ -29,9 +30,9 @@ public class CelestialObjectsEndpointDefinition : IEndpointDefinition
         // Register services related to current endpoints
     }
 
-    private static async Task<IResult> CreateCelestialObjectAsync(CreateCelestialObjectCommand command, IMediator mediator)
+    private static async Task<IResult> CreateCelestialObjectAsync(JsonDeserializeWrapper<CreateCelestialObjectCommand> wrapper, IMediator mediator)
     {
-        return Results.Created($"{Name}/id", await mediator.Send(command));
+        return Results.Created($"{Name}/id", await mediator.Send(wrapper.Value!));
     }
 
     private static async Task<IResult> GetCelestialObjectsAsync(string? type, string? name, string? stateOwner, IMediator mediator)

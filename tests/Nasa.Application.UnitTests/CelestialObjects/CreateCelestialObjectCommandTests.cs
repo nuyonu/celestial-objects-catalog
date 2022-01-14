@@ -14,11 +14,13 @@ public class CreateCelestialObjectCommandTests
 {
     private readonly CreateCelestialObjectCommandHandler handler;
     private readonly IRepository<CelestialObject> repository;
+    private readonly IReadRepository<DiscoverySource> discoveryReadRepository;
 
     public CreateCelestialObjectCommandTests()
     {
         repository = Substitute.For<IRepository<CelestialObject>>();
-        handler = new CreateCelestialObjectCommandHandler(repository);
+        discoveryReadRepository = Substitute.For<IReadRepository<DiscoverySource>>();
+        handler = new CreateCelestialObjectCommandHandler(repository, discoveryReadRepository);
     }
 
     [Fact]
@@ -43,6 +45,7 @@ public class CreateCelestialObjectCommandTests
         const double tolerance = 1;
         response.Succeeded.Should().BeTrue();
         response.Errors.Should().BeEmpty();
+        await this.discoveryReadRepository.Received(1).GetByIdAsync(Arg.Is<Guid>(c => c == discoverySourceId));
         await this.repository.Received(1).CreateAsync(Arg.Is<CelestialObject>(c =>
             c.Name == command.Name &&
             Math.Abs(c.Mass - command.Mass) < tolerance &&

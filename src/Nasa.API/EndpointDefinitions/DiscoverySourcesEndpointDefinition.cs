@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Nasa.API.Common;
 using Nasa.API.EndpointDefinitions.Common;
 using Nasa.Application.DiscoverySources.Commands.CreateDiscoverySource;
 using Nasa.Application.DiscoverySources.Queries.GetDiscoverySources;
@@ -39,9 +40,9 @@ public class DiscoverySourcesEndpointDefinition : IEndpointDefinition
         return Results.Ok(await mediator.Send(new GetDiscoverySourceTypesCommand()));
     }
 
-    private static async Task<IResult> CreateDiscoverySourceAsync(CreateDiscoverySourceCommand createDiscoverySourceCommand,
+    private static async Task<IResult> CreateDiscoverySourceAsync(JsonDeserializeWrapper<CreateDiscoverySourceCommand> createDiscoverySourceCommand,
         IMediator mediator)
     {
-        return Results.Created($"{Name}/id", await mediator.Send(createDiscoverySourceCommand));
+        return Results.Created($"{Name}/id", await mediator.Send(createDiscoverySourceCommand.Value!));
     }
 }

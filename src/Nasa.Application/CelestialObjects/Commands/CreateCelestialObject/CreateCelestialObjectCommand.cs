@@ -23,15 +23,19 @@ public class CreateCelestialObjectCommand : Command<Guid>
 public class CreateCelestialObjectCommandHandler : IRequestHandler<CreateCelestialObjectCommand, CommandResponse<Guid>>
 {
     private readonly IRepository<CelestialObject> repository;
+    private readonly IReadRepository<DiscoverySource> discoverySourceReadRepository;
 
-    public CreateCelestialObjectCommandHandler(IRepository<CelestialObject> repository)
+    public CreateCelestialObjectCommandHandler(IRepository<CelestialObject> repository, IReadRepository<DiscoverySource> discoverySourceReadRepository)
     {
         this.repository = repository;
+        this.discoverySourceReadRepository = discoverySourceReadRepository;
     }
 
     public async Task<CommandResponse<Guid>> Handle(CreateCelestialObjectCommand request,
         CancellationToken cancellationToken)
     {
+        await discoverySourceReadRepository.GetByIdAsync(request.DiscoverySourceId, cancellationToken);
+        
         var celestialObject = new CelestialObject(request.Name, request.Mass, request.EquatorialDiameter,
             request.SurfaceTemperature, request.DiscoveryDate, request.DiscoverySourceId);
 

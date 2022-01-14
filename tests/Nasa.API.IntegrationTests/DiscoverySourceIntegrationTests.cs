@@ -1,70 +1,43 @@
 using System;
 using System.Net;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Alba;
 using FluentAssertions;
 using Nasa.API.IntegrationTests.Common;
 using Nasa.Application.DiscoverySources.Commands.CreateDiscoverySource;
-using Nasa.Application.DiscoverySources.Queries.GetDiscoverySources;
 using Nasa.Domain.Entities;
 using Xunit;
 
 namespace Nasa.API.IntegrationTests;
 
-public class DiscoverySourceIntegrationTests : IClassFixture<NasaAppFixture>
+public class DiscoverySourceIntegrationTests : TestBase
 {
-    private readonly NasaAppFixture fixture;
-
-    public DiscoverySourceIntegrationTests(NasaAppFixture fixture)
-    {
-        this.fixture = fixture;
-    }
+    public string BaseEndpointName { get; } = "/api/discoverySources";
     
     [Fact]
-    public async Task Can_Manage_Discovery_Sources_With_Api()
+    public async Task Add_Endpoint_Should_Add_Celestial_Object_To_Database()
     {
-        // Arrange - Before adding
-        var client = fixture.CreateClient();
+        // Arrange
+        var host = await CreateAlbaHostAsync(nameof(Add_Endpoint_Should_Add_Celestial_Object_To_Database));
 
-        // Act - Before adding
-        var response = await client.GetFromJsonAsync<CommandResponsePublic<GetDiscoverySourcesResponse>>("/api/discoverySources");
-
-        // Assert - Before adding
-        response?.Succeeded.Should().BeTrue();
-        response?.Errors.Should().HaveCount(0);
-        response?.Result.DiscoverySources.Should().HaveCount(0);
-        
-        // Arrange - Adding one discovery source
-        var newDiscoverySource = new CreateDiscoverySourceCommand
+        var result = await host.Scenario(_ =>
         {
-            Name = "Hubble Space Telescope",
-            Type = DiscoverySourceType.GroundTelescope.Name,
-            EstablishmentDate = DateTime.Now,
-            StateOwner = "USA"
-        };
+            _.Post.Json(new CreateDiscoverySourceCommand
+                {
+                    Name = "Hubble Space Telescope",
+                    Type = DiscoverySourceType.GroundTelescope.Name,
+                    EstablishmentDate = DateTime.Now,
+                    StateOwner = "USA"
+                })
+                .ToUrl(BaseEndpointName);
+            _.StatusCodeShouldBeOk();
+            _.StatusCodeShouldBe(HttpStatusCode.Created);
+            _.Header("location").ShouldHaveValues("api/discoverySources/id");
+        });
 
-        // Act - Adding one discovery source
-        var createdResponse = await client.PostAsJsonAsync("/api/discoverySources", newDiscoverySource);
-
-        // Assert - Adding one discovery source
-        createdResponse.StatusCode.Should().Be(HttpStatusCode.Created);
-        createdResponse.Headers.Location.Should().NotBeNull();
-        var createdContentResponse = await createdResponse.Content.ReadFromJsonAsync<CommandResponsePublic<Guid>>();
-        createdContentResponse?.Succeeded.Should().BeTrue();
-        Guid.TryParse(createdContentResponse?.Result.ToString(), out _).Should().BeTrue();
-        
-        // Arrange - After adding
-        
-        // Act - After adding
-        var responseAfterAddingDiscoverySource = await client.GetFromJsonAsync<CommandResponsePublic<GetDiscoverySourcesResponse>>("/api/discoverySources");
-        
-        // Assert - After adding
-        responseAfterAddingDiscoverySource?.Succeeded.Should().BeTrue();
-        responseAfterAddingDiscoverySource?.Errors.Should().HaveCount(0);
-        responseAfterAddingDiscoverySource?.Result.DiscoverySources.Should().Contain(x =>
-            x.Name == newDiscoverySource.Name &&
-            x.Type == DiscoverySourceType.FromName(newDiscoverySource.Type, false).Name &&
-            x.EstablishmentDate == newDiscoverySource.EstablishmentDate &&
-            x.StateOwner == newDiscoverySource.StateOwner);
+        // Assert
+        var response = result.ReadAsJson<CommandResponsePublic<Guid>>();
+        response?.Succeeded.Should().BeTrue();
+        Guid.TryParse(response?.Result.ToString(), out _).Should().BeTrue();
     }
 }
