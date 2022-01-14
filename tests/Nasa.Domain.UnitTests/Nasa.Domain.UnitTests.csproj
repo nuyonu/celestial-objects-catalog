@@ -8,9 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Alba" Version="6.0.0" />
         <PackageReference Include="FluentAssertions" Version="6.3.0" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
         <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
@@ -24,11 +22,15 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Nasa.API\Nasa.API.csproj" />
+        <ProjectReference Include="..\..\src\Nasa.Domain\Nasa.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Samples\CelestialObjectsSample.json">
+        <None Remove="typeDataTest.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Samples\CelestialObjectTypesSample.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </EmbeddedResource>
     </ItemGroup>

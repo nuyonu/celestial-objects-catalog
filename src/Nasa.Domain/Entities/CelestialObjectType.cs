@@ -15,7 +15,7 @@ public class CelestialObjectType : SmartEnum<CelestialObjectType>
         celestialObject => celestialObject.Mass > Constants.JupiterMass && celestialObject.SurfaceTemperature >= 2500,
         1);
 
-    public static readonly CelestialObjectType BlackHole = new("Black Hole", 3,
+    public static readonly CelestialObjectType BlackHole = new("Black hole", 3,
         celestialObject => celestialObject.EquatorialDiameter / 2 < 2 * Constants.GravitationalConstant *
             celestialObject.Mass / Math.Pow(Constants.SpeedOfLight, 2), 0);
 
