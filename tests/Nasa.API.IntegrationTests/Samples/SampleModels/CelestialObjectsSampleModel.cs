@@ -14,7 +14,5 @@ public class CelestialObjectsSampleModel
 
     public DateTime DiscoveryDate { get; set; }
 
-    public Guid DiscoverySourceId { get; set; }
-    
     public string ExpectedType { get; set; }
 }
