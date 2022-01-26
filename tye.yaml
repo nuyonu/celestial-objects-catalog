@@ -1,0 +1,16 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: Nasa
+services:
+- name: nasa-api
+  project: src/Nasa.API/Nasa.API.csproj
+  bindings:
+    - port: 5001
+- name: nasa-webui
+  project: src/Nasa.WebUI/Nasa.WebUI.csproj
+  bindings: 
+    - port: 5000
