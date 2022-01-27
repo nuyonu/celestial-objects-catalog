@@ -1,0 +1,41 @@
+﻿@using Nasa.WebUI.Models.DiscoverySources
+@using Nasa.WebUI.Models
+@inject HttpClient Client;
+
+
+<MatDialogTitle>Discovery source</MatDialogTitle>
+<MatDialogContent>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Name: @discoverySource.Name</li>
+        <li class="list-group-item">Type: @discoverySource.Type</li>
+        <li class="list-group-item">State owner: @discoverySource.StateOwner</li>
+        <li class="list-group-item">Establishment date: @discoverySource.EstablishmentDate.ToString("dd/MM/yyyy")</li>
+    </ul>
+</MatDialogContent>
+<MatDialogActions>
+    <MatButton OnClick="CloseDialog">OK</MatButton>
+</MatDialogActions>
+
+
+@code
+{
+    private DiscoverySourceResponse discoverySource = new();
+
+    [Parameter]
+    public Guid DiscoverySourceIed { get; set; }
+
+    [CascadingParameter]
+    public MatDialogReference? DialogReference { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await Client.GetFromJsonAsync<ApiResponse<DiscoverySourceResponse>>($"/api/discoverySources/{DiscoverySourceIed}");
+
+        discoverySource = response?.Result ?? new DiscoverySourceResponse();
+    }
+
+    private void CloseDialog()
+    {
+        DialogReference?.Close(true);
+    }
+}
