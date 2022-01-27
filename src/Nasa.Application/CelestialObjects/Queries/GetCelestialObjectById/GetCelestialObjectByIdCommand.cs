@@ -29,7 +29,7 @@ public class GetCelestialObjectByIdCommandHandler : IRequestHandler<GetCelestial
     public async Task<CommandResponse<CelestialObjectResponse>> Handle(GetCelestialObjectByIdCommand request, CancellationToken cancellationToken)
     {
         var celestialObject = await readRepository.GetByIdAsync(request.Id, cancellationToken);
-        
+
         return CommandResponse<CelestialObjectResponse>.Success(new CelestialObjectResponse
         {
             Name = celestialObject.Name,

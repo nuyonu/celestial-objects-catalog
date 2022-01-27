@@ -5,6 +5,7 @@ using Nasa.Application.CelestialObjects.Commands.CreateCelestialObject;
 using Nasa.Application.CelestialObjects.Queries.Common;
 using Nasa.Application.CelestialObjects.Queries.GetCelestialObjectById;
 using Nasa.Application.CelestialObjects.Queries.GetCelestialObjects;
+using Nasa.Application.CelestialObjects.Queries.GetCelestialObjectTypes;
 using Nasa.Shared.Application;
 
 namespace Nasa.API.EndpointDefinitions;
@@ -23,6 +24,9 @@ public class CelestialObjectsEndpointDefinition : IEndpointDefinition
         
         app.MapGet($"{Name}/{{id}}", GetCelestialObjectByIdAsync)
             .Produces<CommandResponse<CelestialObjectResponse>>();
+        
+        app.MapGet($"{Name}/types", GetCelestialObjectTypesAsync)
+            .Produces<CommandResponse<GetCelestialObjectTypesResponse>>();
     }
 
     public void DefineServices(IServiceCollection services)
@@ -43,5 +47,10 @@ public class CelestialObjectsEndpointDefinition : IEndpointDefinition
     private static async Task<IResult> GetCelestialObjectByIdAsync(Guid id, IMediator mediator)
     {
         return Results.Ok(await mediator.Send(new GetCelestialObjectByIdCommand(id)));
+    }
+    
+    private static async Task<IResult> GetCelestialObjectTypesAsync(IMediator mediator)
+    {
+        return Results.Ok(await mediator.Send(new GetCelestialObjectTypesCommand()));
     }
 }

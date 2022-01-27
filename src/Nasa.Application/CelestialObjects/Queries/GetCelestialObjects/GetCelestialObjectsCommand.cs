@@ -75,19 +75,16 @@ public class GetCelestialObjectsCommandHandler : IRequestHandler<GetCelestialObj
     {
         var celestialObjects = await readRepository.ListAsync(request.Specifications, cancellationToken);
 
-        var response = new GetCelestialObjectsResponse
+        var response = new GetCelestialObjectsResponse(celestialObjects.Select(c => new CelestialObjectResponse
         {
-            CelestialObjects = celestialObjects.Select(c => new CelestialObjectResponse
-            {
-                Name = c.Name,
-                Mass = c.Mass,
-                Type = c.Type.Name,
-                DiscoveryDate = c.DiscoveryDate,
-                EquatorialDiameter = c.EquatorialDiameter,
-                SurfaceTemperature = c.SurfaceTemperature,
-                DiscoverySourceId = c.DiscoverySourceId
-            })
-        };
+            Name = c.Name,
+            Mass = c.Mass,
+            Type = c.Type.Name,
+            DiscoveryDate = c.DiscoveryDate,
+            EquatorialDiameter = c.EquatorialDiameter,
+            SurfaceTemperature = c.SurfaceTemperature,
+            DiscoverySourceId = c.DiscoverySourceId
+        }));
 
         return Command<GetCelestialObjectsResponse>.Success(response);
     }

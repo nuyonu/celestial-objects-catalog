@@ -9,8 +9,8 @@ services:
 - name: nasa-api
   project: src/Nasa.API/Nasa.API.csproj
   bindings:
-    - port: 5001
+    - port: 7000
 - name: nasa-webui
   project: src/Nasa.WebUI/Nasa.WebUI.csproj
   bindings: 
-    - port: 5000
+    - port: 8000

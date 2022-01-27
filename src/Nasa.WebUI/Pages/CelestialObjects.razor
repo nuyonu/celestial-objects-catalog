@@ -1,0 +1,77 @@
+﻿@page "/celestialObjects"
+@using Nasa.WebUI.Models.CelestialObjects
+@using Nasa.WebUI.Models
+@inject HttpClient client;
+
+<PageTitle>Celestial objects</PageTitle>
+
+<div class="d-flex flex-row justify-content-between">
+    <MatTextField class="mx-2" @bind-Value="@requestParams.Name" Label="Search by name"></MatTextField>
+    <MatTextField class="mx-2" @bind-Value="@requestParams.StateOwner" Label="Search by state owner"></MatTextField>
+    <MatSelect Label="Pick a type" @bind-Value="requestParams.Type">
+        <MatOptionString Value=""></MatOptionString>
+        @foreach (var type in types)
+        {
+            <MatOptionString Value="@type">@type</MatOptionString>
+        }
+    </MatSelect>
+    <MatButton @onclick="UpdateCelestialObjectsAsync">Search</MatButton>
+</div>
+
+<div class="d-flex flex-wrap flex-row">
+    @foreach (var celestialObject in celestialObjectsResponse)
+    {
+        <div class="card m-3">
+            <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Planets2013.svg/260px-Planets2013.svg.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@celestialObject.Name</h5>
+                <p class="card-text">@celestialObject.Type</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Mass: @celestialObject.Mass</li>
+                <li class="list-group-item">Surface temperature: @celestialObject.SurfaceTemperature</li>
+                <li class="list-group-item">Equatorial diameter: @celestialObject.EquatorialDiameter</li>
+                <li class="list-group-item">Discovery date: @celestialObject.DiscoveryDate.ToString("dd/MM/yyyy")</li>
+            </ul>
+            <div class="card-body">
+                <a href="celestialObjects" class="card-link">See discovery source (Not working)</a>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private IEnumerable<CelestialObjectResponse> celestialObjectsResponse = new List<CelestialObjectResponse>();
+
+    private IEnumerable<string> types = new List<string>();
+
+    private readonly RequestParams requestParams = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var typesResponse = await client.GetFromJsonAsync<ApiResponse<GetCelestialObjectTypesResponse>>("/api/celestialObjects/types");
+
+        types = typesResponse?.Result.Types ?? Array.Empty<string>();
+
+        var response = await client.GetFromJsonAsync<ApiResponse<GetCelestialObjectsResponse>>("/api/celestialObjects");
+
+        celestialObjectsResponse = response?.Result.CelestialObjects ?? Array.Empty<CelestialObjectResponse>();
+    }
+
+    private async Task UpdateCelestialObjectsAsync()
+    {
+        var response = await client.GetFromJsonAsync<ApiResponse<GetCelestialObjectsResponse>>($"/api/celestialObjects?name={requestParams.Name}&stateOwner={requestParams.StateOwner}&type={requestParams.Type}");
+
+        celestialObjectsResponse = response?.Result.CelestialObjects ?? Array.Empty<CelestialObjectResponse>();
+    }
+
+    public class RequestParams
+    {
+        public string Type { get; set; } = string.Empty;
+
+        public string Name { get; set; } = string.Empty;
+
+        public string StateOwner { get; set; } = string.Empty;
+    }
+
+}
