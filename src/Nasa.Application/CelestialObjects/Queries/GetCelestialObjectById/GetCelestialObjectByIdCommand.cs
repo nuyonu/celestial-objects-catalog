@@ -17,7 +17,7 @@ public class GetCelestialObjectByIdCommand : Command<CelestialObjectResponse>
 }
 
 public class GetCelestialObjectByIdCommandHandler : IRequestHandler<GetCelestialObjectByIdCommand,
-        CommandResponse<CelestialObjectResponse>>
+    CommandResponse<CelestialObjectResponse>>
 {
     private readonly IReadRepository<CelestialObject> readRepository;
 
@@ -25,8 +25,9 @@ public class GetCelestialObjectByIdCommandHandler : IRequestHandler<GetCelestial
     {
         this.readRepository = readRepository;
     }
-    
-    public async Task<CommandResponse<CelestialObjectResponse>> Handle(GetCelestialObjectByIdCommand request, CancellationToken cancellationToken)
+
+    public async Task<CommandResponse<CelestialObjectResponse>> Handle(GetCelestialObjectByIdCommand request,
+        CancellationToken cancellationToken)
     {
         var celestialObject = await readRepository.GetByIdAsync(request.Id, cancellationToken);
 

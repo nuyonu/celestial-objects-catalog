@@ -25,7 +25,7 @@ public class DiscoverySourcesEndpointDefinition : IEndpointDefinition
 
         app.MapGet($"{Name}/types", GetDiscoverySourceTypesAsync)
             .Produces<CommandResponse<GetDiscoverySourceTypesResponse>>();
-        
+
         app.MapGet($"{Name}/{{id}}", GetDiscoverySourceByIdAsync)
             .Produces<CommandResponse<DiscoverySourceResponse>>();
     }
@@ -39,18 +39,19 @@ public class DiscoverySourcesEndpointDefinition : IEndpointDefinition
     {
         return Results.Ok(await mediator.Send(new GetDiscoverySourcesCommand()));
     }
-    
+
     private static async Task<IResult> GetDiscoverySourceTypesAsync(IMediator mediator)
     {
         return Results.Ok(await mediator.Send(new GetDiscoverySourceTypesCommand()));
     }
 
-    private static async Task<IResult> CreateDiscoverySourceAsync(JsonDeserializeWrapper<CreateDiscoverySourceCommand> createDiscoverySourceCommand,
+    private static async Task<IResult> CreateDiscoverySourceAsync(
+        JsonDeserializeWrapper<CreateDiscoverySourceCommand> createDiscoverySourceCommand,
         IMediator mediator)
     {
         return Results.Created($"{Name}/id", await mediator.Send(createDiscoverySourceCommand.Value!));
     }
-    
+
     private static async Task<IResult> GetDiscoverySourceByIdAsync(Guid id, IMediator mediator)
     {
         return Results.Ok(await mediator.Send(new GetDiscoverySourceByIdCommand(id)));

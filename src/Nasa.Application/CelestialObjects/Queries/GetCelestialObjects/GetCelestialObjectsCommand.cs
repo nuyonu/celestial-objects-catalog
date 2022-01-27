@@ -10,18 +10,18 @@ namespace Nasa.Application.CelestialObjects.Queries.GetCelestialObjects;
 
 public class GetCelestialObjectsCommand : Command<GetCelestialObjectsResponse>
 {
-    private string? name;
-    private string? stateOwner;
-    private string? type;
-    
+    private readonly string? name;
+    private readonly string? stateOwner;
+    private readonly string? type;
+
     public GetCelestialObjectsCommand(string? type, string? name, string? stateOwner)
     {
         Specifications = new List<Specification<CelestialObject>>();
         Type = type;
         Name = name;
         StateOwner = stateOwner;
-        
-        if (!this.Specifications.Any()) this.Specifications.Add(new CelestialObjectsAllSpec());
+
+        if (!Specifications.Any()) Specifications.Add(new CelestialObjectsAllSpec());
     }
 
     public string? Type

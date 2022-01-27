@@ -4,13 +4,13 @@ using Nasa.Shared.Application;
 
 namespace Nasa.Application.CelestialObjects.Queries.GetCelestialObjectTypes;
 
-public class GetCelestialObjectTypesCommand : Command<GetCelestialObjectTypesResponse>
-{ }
+public class GetCelestialObjectTypesCommand : Command<GetCelestialObjectTypesResponse> { }
 
 public class GetDiscoverySourceTypesCommandHandler : IRequestHandler<GetCelestialObjectTypesCommand,
     CommandResponse<GetCelestialObjectTypesResponse>>
 {
-    public Task<CommandResponse<GetCelestialObjectTypesResponse>> Handle(GetCelestialObjectTypesCommand request, CancellationToken cancellationToken)
+    public Task<CommandResponse<GetCelestialObjectTypesResponse>> Handle(GetCelestialObjectTypesCommand request,
+        CancellationToken cancellationToken)
     {
         var response = new GetCelestialObjectTypesResponse(CelestialObjectType.List.Select(c => c.Name));
 
