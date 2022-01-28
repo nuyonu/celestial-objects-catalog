@@ -29,7 +29,8 @@ public class CelestialObjectIntegrationTests : TestBase
             DiscoverySourceType.GroundTelescope, "USA");
         databaseContext.DiscoverySources.Add(discoverySource);
         await databaseContext.SaveChangesAsync();
-        
+
+        // Act
         var result = await host.Scenario(_ =>
         {
             _.Post.Json(new CreateCelestialObjectCommand

@@ -8,6 +8,8 @@ using Nasa.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors();
+
 builder.Services.AddEndpointDefinitions(typeof(IEndpointDefinitionsMarker));
 
 builder.Services.Configure<JsonOptions>(options =>
@@ -24,16 +26,20 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseCors(c => c.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
 app.UseEndpointDefinitions();
 
 app.ConfigureExceptionHandler();
+
+app.UseSecurityHeaders();
 
 await app.RunAsync();
 
 #pragma warning disable CA1050
 namespace Nasa.API
 {
-    public partial class Program // For testing purpose
+    public class Program // For testing purpose
     { }
 }
 #pragma warning restore CA1050

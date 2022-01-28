@@ -10,6 +10,7 @@ using Xunit;
 
 namespace Nasa.Application.UnitTests.CelestialObjects;
 
+// Just an example here. Too lazy to do more
 public class CreateCelestialObjectCommandTests
 {
     private readonly CreateCelestialObjectCommandHandler handler;

@@ -35,7 +35,7 @@ public static class WebApplicationExtensions
                     case EntityNotFoundException entityNotFoundException:
                     {
                         code = StatusCodes.Status404NotFound;
-                        errors = new []{ entityNotFoundException.Message };
+                        errors = new[] { entityNotFoundException.Message };
 
                         break;
                     }

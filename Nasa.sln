@@ -3,25 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.API", "src\Nasa.API\Nasa.API.csproj", "{E8DAEC56-8752-443A-9E45-903144872F40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nasa.API", "src\Nasa.API\Nasa.API.csproj", "{E8DAEC56-8752-443A-9E45-903144872F40}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.Domain", "src\Nasa.Domain\Nasa.Domain.csproj", "{BB54CF08-15B7-4487-B0E3-7DEA7BD32EFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nasa.Domain", "src\Nasa.Domain\Nasa.Domain.csproj", "{BB54CF08-15B7-4487-B0E3-7DEA7BD32EFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.Application", "src\Nasa.Application\Nasa.Application.csproj", "{043E67C6-8BA5-446A-8E0D-36FB39AA9CB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nasa.Application", "src\Nasa.Application\Nasa.Application.csproj", "{043E67C6-8BA5-446A-8E0D-36FB39AA9CB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.Infrastructure", "src\Nasa.Infrastructure\Nasa.Infrastructure.csproj", "{885B1195-A698-49B6-A497-F0AA6022F31C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nasa.Infrastructure", "src\Nasa.Infrastructure\Nasa.Infrastructure.csproj", "{885B1195-A698-49B6-A497-F0AA6022F31C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.Shared", "src\Nasa.Shared\Nasa.Shared.csproj", "{03699CAC-C1F9-429F-8CB9-9EFBD3323F1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nasa.Shared", "src\Nasa.Shared\Nasa.Shared.csproj", "{03699CAC-C1F9-429F-8CB9-9EFBD3323F1A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5D9F89F7-3C03-4EAA-945F-56556CBDC215}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5E43FBBA-A539-419C-821F-48E11953FD28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.API.IntegrationTests", "tests\Nasa.API.IntegrationTests\Nasa.API.IntegrationTests.csproj", "{4F19A52E-76F2-45EC-A7E3-3318605E2C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nasa.API.IntegrationTests", "tests\Nasa.API.IntegrationTests\Nasa.API.IntegrationTests.csproj", "{4F19A52E-76F2-45EC-A7E3-3318605E2C12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.Application.UnitTests", "tests\Nasa.Application.UnitTests\Nasa.Application.UnitTests.csproj", "{D6AAD70E-BBDB-4651-A90B-63EA15724813}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nasa.Application.UnitTests", "tests\Nasa.Application.UnitTests\Nasa.Application.UnitTests.csproj", "{D6AAD70E-BBDB-4651-A90B-63EA15724813}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.Domain.UnitTests", "tests\Nasa.Domain.UnitTests\Nasa.Domain.UnitTests.csproj", "{EBB960ED-445D-4D8B-A5AB-9AF510039E46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nasa.Domain.UnitTests", "tests\Nasa.Domain.UnitTests\Nasa.Domain.UnitTests.csproj", "{EBB960ED-445D-4D8B-A5AB-9AF510039E46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nasa.WebUI", "src\Nasa.WebUI\Nasa.WebUI.csproj", "{83DE3C82-93DD-491A-8992-3F3DB6C61CB3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,21 +63,26 @@ Global
 		{EBB960ED-445D-4D8B-A5AB-9AF510039E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBB960ED-445D-4D8B-A5AB-9AF510039E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBB960ED-445D-4D8B-A5AB-9AF510039E46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83DE3C82-93DD-491A-8992-3F3DB6C61CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83DE3C82-93DD-491A-8992-3F3DB6C61CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83DE3C82-93DD-491A-8992-3F3DB6C61CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83DE3C82-93DD-491A-8992-3F3DB6C61CB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CB96CD52-41B7-4FD3-BE75-DB4E1871F70D}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E8DAEC56-8752-443A-9E45-903144872F40} = {5D9F89F7-3C03-4EAA-945F-56556CBDC215}
-		{043E67C6-8BA5-446A-8E0D-36FB39AA9CB9} = {5D9F89F7-3C03-4EAA-945F-56556CBDC215}
 		{BB54CF08-15B7-4487-B0E3-7DEA7BD32EFC} = {5D9F89F7-3C03-4EAA-945F-56556CBDC215}
+		{043E67C6-8BA5-446A-8E0D-36FB39AA9CB9} = {5D9F89F7-3C03-4EAA-945F-56556CBDC215}
 		{885B1195-A698-49B6-A497-F0AA6022F31C} = {5D9F89F7-3C03-4EAA-945F-56556CBDC215}
 		{03699CAC-C1F9-429F-8CB9-9EFBD3323F1A} = {5D9F89F7-3C03-4EAA-945F-56556CBDC215}
 		{4F19A52E-76F2-45EC-A7E3-3318605E2C12} = {5E43FBBA-A539-419C-821F-48E11953FD28}
 		{D6AAD70E-BBDB-4651-A90B-63EA15724813} = {5E43FBBA-A539-419C-821F-48E11953FD28}
 		{EBB960ED-445D-4D8B-A5AB-9AF510039E46} = {5E43FBBA-A539-419C-821F-48E11953FD28}
+		{83DE3C82-93DD-491A-8992-3F3DB6C61CB3} = {5D9F89F7-3C03-4EAA-945F-56556CBDC215}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB96CD52-41B7-4FD3-BE75-DB4E1871F70D}
 	EndGlobalSection
 EndGlobal

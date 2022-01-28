@@ -1,0 +1,31 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: Nasa
+services:
+  - name: nasa-webui
+    project: src/Nasa.WebUI/Nasa.WebUI.csproj
+    bindings:
+      - port: 5001
+        protocol: https
+  - name: nasa-api
+    project: src/Nasa.API/Nasa.API.csproj
+    bindings:
+      - port: 5003
+        protocol: https
+ingress:
+  - name: ingress
+    bindings:
+      - port: 8080
+        protocol: https
+    rules:
+      - path: /api
+        preservePath: true
+        service: nasa-api
+      - path: /swagger
+        preservePath: true
+        service: nasa-api
+      - service: nasa-webui

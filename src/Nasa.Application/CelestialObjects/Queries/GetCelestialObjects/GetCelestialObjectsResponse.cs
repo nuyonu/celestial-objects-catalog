@@ -4,10 +4,10 @@ namespace Nasa.Application.CelestialObjects.Queries.GetCelestialObjects;
 
 public class GetCelestialObjectsResponse
 {
-    public GetCelestialObjectsResponse()
+    public GetCelestialObjectsResponse(IEnumerable<CelestialObjectResponse> celestialObjects)
     {
-        CelestialObjects = new List<CelestialObjectResponse>();
+        CelestialObjects = celestialObjects;
     }
 
-    public IEnumerable<CelestialObjectResponse> CelestialObjects { get; set; }
+    public IEnumerable<CelestialObjectResponse> CelestialObjects { get; }
 }
